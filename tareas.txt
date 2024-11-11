@@ -1,0 +1,4 @@
+ - Enviar mail de confirmación
+ - Confirmar algo con token (creo que tokenapi)
+ - Entender el código
+ - Hacer Frontend en vez de usar swagger
