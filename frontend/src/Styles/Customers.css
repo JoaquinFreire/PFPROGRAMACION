@@ -1,0 +1,71 @@
+/* Customers.css */
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+}
+
+li:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+li div {
+    margin-bottom: 5px;
+}
+
+li div strong {
+    color: #555;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.loading {
+    color: #555;
+    text-align: center;
+}

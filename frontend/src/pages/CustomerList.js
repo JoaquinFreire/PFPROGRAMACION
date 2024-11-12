@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCustomers, deleteCustomer } from '../services/customerService';
+import '../Styles/Customers.css';  // Importa el archivo CSS
 
 const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
@@ -12,7 +13,7 @@ const CustomerList = () => {
     setLoading(true);
     getCustomers()
       .then((response) => {
-        setCustomers(response.data);  // Asigna los clientes al estado
+        setCustomers(response.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -24,25 +25,23 @@ const CustomerList = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this customer?')) {
       try {
-        await deleteCustomer(id); // Llamamos al servicio de eliminación
-        setCustomers(customers.filter((customer) => customer.id !== id)); // Actualizamos el estado para eliminar el cliente de la lista
+        await deleteCustomer(id);
+        setCustomers(customers.filter((customer) => customer.id !== id));
       } catch (err) {
         setError('Error deleting customer');
       }
     }
   };
 
-  // Función para formatear la dirección
   const formatAddress = (address) => {
     return `${address.country}, ${address.state}, ${address.city}, ${address.line1}, ${address.zipCode}`;
   };
 
-  // Si está cargando o hay error
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="loading">Loading...</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
-    <div>
+    <div className="container">
       <h2>Customer List</h2>
       <button onClick={() => navigate('/customers/new')}>Agregar nuevo cliente</button>
       <ul>
@@ -54,14 +53,11 @@ const CustomerList = () => {
             <div><strong>Address:</strong> {formatAddress(customer.address)}</div>
             <div><strong>Active:</strong> {customer.active ? 'Yes' : 'No'}</div>
             
-            {/* Botón para editar */}
-            <button onClick={() => navigate(`/customers/edit/${customer.id}`)}>Editar</button>
-            
-            {/* Botón para eliminar */}
-            <button onClick={() => handleDelete(customer.id)}>Eliminar</button>
-            
-            {/* Nuevo botón para ver los detalles */}
-            <button onClick={() => navigate(`/customers/${customer.id}`)}>Ver Detalles</button>
+            <div className="buttons">
+              <button onClick={() => navigate(`/customers/edit/${customer.id}`)}>Editar</button>
+              <button onClick={() => handleDelete(customer.id)}>Eliminar</button>
+              <button onClick={() => navigate(`/customers/${customer.id}`)}>Ver Detalles</button>
+            </div>
           </li>
         ))}
       </ul>
