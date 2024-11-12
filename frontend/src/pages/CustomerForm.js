@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { createCustomer, updateCustomer, getCustomerById } from '../services/customerService';
 import { useParams, useNavigate } from 'react-router-dom';
+import '../Styles/CustomerForm.css'; // Importa el archivo CSS
 
 const CustomerForm = () => {
-    const { id } = useParams(); // Captura el ID de la URL para edición
-    const navigate = useNavigate(); // Para redireccionar después de guardar
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [customer, setCustomer] = useState({
         name: '',
         lastName: '',
@@ -20,13 +21,11 @@ const CustomerForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Cargar datos del cliente si existe un ID (modo edición)
     useEffect(() => {
         if (id) {
             setLoading(true);
             getCustomerById(id)
                 .then((response) => {
-                    // Verifica si hay datos antes de establecer el estado
                     if (response.data) {
                         setCustomer(response.data);
                     } else {
@@ -54,17 +53,13 @@ const CustomerForm = () => {
         setLoading(true);
         setError(null);
 
-        console.log("Datos del cliente a enviar:", customer); // Muestra los datos antes de hacer el update
-
         try {
             if (id) {
-                // Modo de actualización
                 await updateCustomer(id, customer);
             } else {
-                // Modo de creación
                 await createCustomer(customer);
             }
-            navigate('/customers'); // Redirecciona a la lista después de guardar
+            navigate('/customers');
         } catch (err) {
             console.error("Error al guardar datos del cliente:", err.response?.data || err.message);
             setError('Error saving customer data');
@@ -73,11 +68,11 @@ const CustomerForm = () => {
         }
     };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    if (loading) return <p className="loading">Loading...</p>;
+    if (error) return <p className="error">{error}</p>;
 
     return (
-        <div>
+        <div className="container">
             <h2>{id ? 'Edit Customer' : 'Create Customer'}</h2>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -90,7 +85,6 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <label>
                     Last Name:
                     <input
@@ -101,7 +95,6 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <label>
                     Email:
                     <input
@@ -112,7 +105,6 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <label>
                     Phone Number:
                     <input
@@ -123,7 +115,6 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <label>
                     Country:
                     <input
@@ -134,7 +125,6 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <label>
                     Address Line 1:
                     <input
@@ -145,7 +135,6 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <label>
                     Address Line 2:
                     <input
@@ -155,7 +144,6 @@ const CustomerForm = () => {
                         onChange={handleChange}
                     />
                 </label>
-                <br />
                 <label>
                     City:
                     <input
@@ -166,7 +154,6 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <label>
                     State:
                     <input
@@ -177,7 +164,6 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <label>
                     Zip Code:
                     <input
@@ -188,11 +174,10 @@ const CustomerForm = () => {
                         required
                     />
                 </label>
-                <br />
                 <button type="submit" disabled={loading}>
                     {loading ? 'Saving...' : 'Save'}
                 </button>
-                <button onClick={() => navigate(`/customers/`)}>Volver</button>
+                <button type="button" onClick={() => navigate('/customers/')}>Volver</button>
             </form>
         </div>
     );

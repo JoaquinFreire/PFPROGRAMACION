@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCustomerById, deleteCustomer } from '../services/customerService';
+import '../Styles/CustomerDatails.css'; // Importa el archivo CSS
 
 const CustomerDetails = () => {
-  const { id } = useParams(); // Obtiene el ID desde la URL
+  const { id } = useParams();
   const [customer, setCustomer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Hook para navegar entre rutas
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -25,19 +26,19 @@ const CustomerDetails = () => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this customer?')) {
       try {
-        await deleteCustomer(id); // Eliminar cliente
-        navigate('/customers'); // Redirigir a la lista de clientes
+        await deleteCustomer(id);
+        navigate('/customers');
       } catch (err) {
         setError('Error deleting customer');
       }
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="loading">Loading...</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
-    <div>
+    <div className="container">
       <h2>Customer Details</h2>
       {customer ? (
         <div>
@@ -47,8 +48,7 @@ const CustomerDetails = () => {
           <p><strong>Country:</strong> {customer.address?.country}</p>
           <p><strong>Address:</strong> {customer.address?.line1}, {customer.address?.line2}, {customer.address?.city}, {customer.address?.state} {customer.address?.zipCode}</p>
           
-          {/* Botones debajo de los detalles */}
-          <div>
+          <div className="button-group">
             <button onClick={() => navigate('/customers')}>Volver</button>
             <button onClick={() => navigate(`/customers/edit/${customer.id}`)}>Editar</button>
             <button onClick={handleDelete}>Eliminar</button>

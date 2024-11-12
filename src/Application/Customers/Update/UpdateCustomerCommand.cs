@@ -12,4 +12,5 @@ public record UpdateCustomerCommand(
     string City,
     string State,
     string ZipCode,
-    bool Active) : IRequest<ErrorOr<Unit>>;
+    bool IsVerified,
+    string? Token) : IRequest<ErrorOr<Unit>>; // Se agrega el Token como opcional

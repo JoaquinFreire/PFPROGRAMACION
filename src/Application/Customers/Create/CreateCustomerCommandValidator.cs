@@ -48,5 +48,10 @@ public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCo
             .NotEmpty()
             .MaximumLength(10)
             .WithName("Zip Code");
+        RuleFor(r => r.IsVerified)
+            .NotNull()
+            .Must(x => x == true || x == false)
+            .WithMessage("IsVerified must be true or false.");
+
     }
 }

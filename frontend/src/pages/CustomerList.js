@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCustomers, deleteCustomer } from '../services/customerService';
-import '../Styles/Customers.css';  // Importa el archivo CSS
+import '../Styles/CustomerList.css';  // Importa el archivo CSS
 
 const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
@@ -13,6 +13,7 @@ const CustomerList = () => {
     setLoading(true);
     getCustomers()
       .then((response) => {
+        console.log('Datos obtenidos de la base de datos:', response.data);
         setCustomers(response.data);
         setLoading(false);
       })
@@ -51,7 +52,7 @@ const CustomerList = () => {
             <div><strong>Email:</strong> {customer.email}</div>
             <div><strong>Phone:</strong> {customer.phoneNumber}</div>
             <div><strong>Address:</strong> {formatAddress(customer.address)}</div>
-            <div><strong>Active:</strong> {customer.active ? 'Yes' : 'No'}</div>
+            <div><strong>Verified:</strong> {customer.isVerified ? 'Yes' : 'No'}</div>
             
             <div className="buttons">
               <button onClick={() => navigate(`/customers/edit/${customer.id}`)}>Editar</button>

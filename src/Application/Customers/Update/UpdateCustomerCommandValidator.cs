@@ -52,7 +52,8 @@ public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCo
             .MaximumLength(10)
             .WithName("Zip Code");
 
-        RuleFor(r => r.Active)
-            .NotNull();
+        /* RuleFor(r => r.Active)
+            .NotNull(); */
+            RuleFor(r => r.IsVerified).NotNull();
     }
 }
