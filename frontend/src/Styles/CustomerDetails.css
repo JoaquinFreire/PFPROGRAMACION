@@ -63,3 +63,12 @@ button:disabled {
     color: #555;
     text-align: center;
 }
+.buttons .delete {
+    background-color: rgb(218, 60, 60);
+}
+.buttons .edit {
+    background-color: rgb(35, 88, 204);
+}
+.buttons .details {
+    background-color: rgb(71, 156, 37);
+}

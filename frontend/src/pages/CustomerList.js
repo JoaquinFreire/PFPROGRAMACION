@@ -44,7 +44,7 @@ const CustomerList = () => {
   return (
     <div className="container">
       <h2>Customer List</h2>
-      <button onClick={() => navigate('/customers/new')}>Agregar nuevo cliente</button>
+      <button class="agregar" onClick={() => navigate('/customers/new')}>Add new client</button>
       <ul>
         {customers.map((customer) => (
           <li key={customer.id}>
@@ -55,9 +55,9 @@ const CustomerList = () => {
             <div><strong>Verified:</strong> {customer.isVerified ? 'Yes' : 'No'}</div>
             
             <div className="buttons">
-              <button onClick={() => navigate(`/customers/edit/${customer.id}`)}>Editar</button>
-              <button onClick={() => handleDelete(customer.id)}>Eliminar</button>
-              <button onClick={() => navigate(`/customers/${customer.id}`)}>Ver Detalles</button>
+              <button class="edit" onClick={() => navigate(`/customers/edit/${customer.id}`)}>Edit</button>
+              <button class="delete" onClick={() => handleDelete(customer.id)}>Delete</button>
+              <button class="details" onClick={() => navigate(`/customers/${customer.id}`)}>Details</button>
             </div>
           </li>
         ))}

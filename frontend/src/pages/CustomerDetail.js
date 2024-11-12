@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCustomerById, deleteCustomer } from '../services/customerService';
-import '../Styles/CustomerDatails.css'; // Importa el archivo CSS
+import '../Styles/CustomerDetails.css'; // Importa el archivo CSS
 
 const CustomerDetails = () => {
   const { id } = useParams();
@@ -49,9 +49,9 @@ const CustomerDetails = () => {
           <p><strong>Address:</strong> {customer.address?.line1}, {customer.address?.line2}, {customer.address?.city}, {customer.address?.state} {customer.address?.zipCode}</p>
           
           <div className="button-group">
-            <button onClick={() => navigate('/customers')}>Volver</button>
-            <button onClick={() => navigate(`/customers/edit/${customer.id}`)}>Editar</button>
-            <button onClick={handleDelete}>Eliminar</button>
+            <button class="back" onClick={() => navigate('/customers')}>Back</button>
+            <button class="edit" onClick={() => navigate(`/customers/edit/${customer.id}`)}>Edit</button>
+            <button class="delete" onClick={handleDelete}>Delete</button>
           </div>
         </div>
       ) : (

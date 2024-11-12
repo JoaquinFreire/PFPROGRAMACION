@@ -14,7 +14,7 @@ h2 {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #af4c6d;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -68,4 +68,21 @@ li div strong {
 .loading {
     color: #555;
     text-align: center;
+}
+.button-group .delete {
+    background-color: rgb(218, 60, 60);
+}
+.button-group .edit {
+    background-color: rgb(35, 88, 204);
+}
+.button-group .back {
+    background-color: rgb(93, 184, 57);
+}
+.container .agregar {
+    background-color: #555;
+    font-size: 15px;
+    padding: 15px 22px;
+}
+.container .agregar:hover {
+    background-color: #6b6666;
 }

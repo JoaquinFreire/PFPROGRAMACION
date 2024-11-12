@@ -63,6 +63,7 @@ const CustomerForm = () => {
         } catch (err) {
             console.error("Error al guardar datos del cliente:", err.response?.data || err.message);
             setError('Error saving customer data');
+            window.location.reload(); // Recarga la página cuando hay un error
         } finally {
             setLoading(false);
         }
